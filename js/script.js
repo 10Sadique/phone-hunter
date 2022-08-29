@@ -46,7 +46,7 @@ const displayPhones = (phones, dataLimit) => {
                         By ${phone.brand}
                         </p>
                     </div>
-                    <button class="self-end py-2 px-5 bg-indigo-600 text-white font-semibold rounded-lg shadow-md shadow-indigo-500/40 hover:bg-indigo-700 transition-all duration-300">Learn More</button>
+                    <button class="self-end py-2 px-5 bg-indigo-600 text-white font-semibold rounded-lg shadow-md shadow-indigo-500/40 hover:bg-indigo-700 transition-all duration-300">Learn More &rarr;</button>
                 </div>
             </div>
         `
