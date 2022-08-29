@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>Phone Hunter - API Practice</title>
+    </head>
+    <body class="bg-gray-300">
+        <header>
+            <nav class="fixed top-0 w-full bg-gray-200 py-3 px-20 flex flex-col lg:flex-row items-center justify-between gap-5 shadow-lg">
+                <div><a href="#" class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-br from-rose-700 to-violet-700">Phone Hunter</a></div>
+                <div>
+                    <div class="space-x-2 flex items-center">
+                        <input class="bg-gray-100 py-2 px-5 rounded-lg shadow-md shadbg-gray-100/40" type="search" name="" id="" placeholder="Search Phones">
+                        <button class="text-white py-2 px-5 bg-indigo-600 rounded-lg shadow-md shadow-indigo-600/50 font-semibold">Search</button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="mt-24">
+            <section class="my-10 lg:mx-16 mx-6">
+                <div id="phone-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+                </div>
+            </section>
+        </main>
+
+        <script src="js/script.js"></script>
+    </body>
+</html>
