@@ -46,10 +46,16 @@ const displayPhones = async phones => {
 
         phoneContainer.appendChild(phoneDiv)
     })
+
+    // stop loader
+    toggleLoader(false)
 }
 
 // search button handler
 document.getElementById('btn-search').addEventListener('click', () => {
+    // start loader
+    toggleLoader(true)
+
     const searchField = document.getElementById('search-field')
     const searchFieldData = searchField.value 
 
@@ -57,3 +63,13 @@ document.getElementById('btn-search').addEventListener('click', () => {
     loadPhones(searchFieldData)
     searchField.value = ''
 })
+
+// loader
+const toggleLoader = isLoading => {
+    const loaderSection = document.getElementById('loader')
+    if (isLoading) {
+        loaderSection.classList.remove('hidden')
+    } else {
+        loaderSection.classList.add('hidden')
+    }
+}
