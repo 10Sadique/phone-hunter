@@ -1,16 +1,29 @@
-const loadPhones = async () => {
-    const url = `https://openapi.programming-hero.com/api/phones?search=iphone`
+// load phones data
+const loadPhones = async (search) => {
+    const url = `https://openapi.programming-hero.com/api/phones?search=${search}`
     const res = await fetch(url)
     const data = await res.json()
 
     displayPhones(data.data)
 }
 
+// display phones
 const displayPhones = async phones => {
     const phoneContainer = document.getElementById('phone-container')
+    phoneContainer.textContent = ``
+    // showing first 21 phones
+    phones = phones.slice(0, 21)
+
+    // display no phone fount
+    const noPhone = document.getElementById('no-phone-found')
+    if (phones.length == 0) {
+        noPhone.classList.remove('hidden')
+    } else {
+        noPhone.classList.add('hidden')
+    }
 
     phones.forEach(phone => {
-        console.log(phone)
+        // console.log(phone)
 
         const phoneDiv = document.createElement('div')
         phoneDiv.innerHTML = `
@@ -26,7 +39,7 @@ const displayPhones = async phones => {
                         By ${phone.brand}
                         </p>
                     </div>
-                    <button class="py-2 px-5 bg-indigo-500 text-white font-semibold rounded-lg shadow-md shadow-indigo-500/40">Learn More &rarr;</button>
+                    <button class="py-2 px-5 bg-indigo-600 text-white font-semibold rounded-lg shadow-md shadow-indigo-500/40 hover:bg-indigo-700 transition-all duration-300">Learn More &rarr;</button>
                 </div>
             </div>
         `
@@ -35,19 +48,12 @@ const displayPhones = async phones => {
     })
 }
 
-loadPhones()
+// search button handler
+document.getElementById('btn-search').addEventListener('click', () => {
+    const searchField = document.getElementById('search-field')
+    const searchFieldData = searchField.value 
 
 
-        // <div class="h-full bg-white rounded-2xl p-3 shadow-md">
-        //     <a href="#" class="flex flex-col items-center md:flex-row md:max-w-xl">
-
-        //         <div class="grid place-items-center">
-        //             <img class="h-full" src="${phone.image}">
-        //         </div>
-
-        //         <div class="self-start flex flex-col justify-between p-4 leading-normal">
-        //             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">${phone.phone_name}</h5>
-        //             <p class="mb-3 font-normal text-gray-700/50"><span>Brand: </span>${phone.brand}</p>
-        //         </div>
-        //     </a>
-        // </div>
+    loadPhones(searchFieldData)
+    searchField.value = ''
+})
