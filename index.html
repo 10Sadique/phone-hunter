@@ -3,10 +3,24 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            poppins: "'Poppins', sans-serif"
+                        }
+                    }
+                }
+            }
+        </script>
         <title>Phone Hunter - API Practice</title>
     </head>
-    <body class="bg-gray-300">
+    <body class="bg-gray-300 font-poppins">
         <header>
             <nav class="md:fixed top-0 w-full bg-gray-200 py-3 px-20 flex flex-col lg:flex-row items-center justify-between gap-5 shadow-lg">
                 <div><a href="#" class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-br from-rose-700 to-violet-700">Phone Hunter</a></div>
