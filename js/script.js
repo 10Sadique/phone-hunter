@@ -38,7 +38,7 @@ const displayPhones = (phones, dataLimit) => {
             
                 <img class="" src="${phone.image} " alt="${phone.slug} ">
 
-                <div class="px-4 py-2 flex flex-col justify-between items-start space-y-5">
+                <div class="w-full pl-4 flex flex-col justify-between items-start space-y-5">
                     <div>
                         <h1 class="text-2xl font-bold text-gray-800">${phone.phone_name} </h1>
 
@@ -46,7 +46,7 @@ const displayPhones = (phones, dataLimit) => {
                         By ${phone.brand}
                         </p>
                     </div>
-                    <button class="py-2 px-5 bg-indigo-600 text-white font-semibold rounded-lg shadow-md shadow-indigo-500/40 hover:bg-indigo-700 transition-all duration-300">Learn More &rarr;</button>
+                    <button class="self-end py-2 px-5 bg-indigo-600 text-white font-semibold rounded-lg shadow-md shadow-indigo-500/40 hover:bg-indigo-700 transition-all duration-300">Learn More</button>
                 </div>
             </div>
         `
