@@ -31,7 +31,7 @@ const displayPhones = async phones => {
             
                 <img class="" src="${phone.image} " alt="${phone.slug} ">
 
-                <div class="px-4 py-2 flex flex-col justify-between items-start">
+                <div class="px-4 py-2 flex flex-col justify-between items-start space-y-5">
                     <div>
                         <h1 class="text-2xl font-bold text-gray-800">${phone.phone_name} </h1>
 
@@ -64,7 +64,7 @@ document.getElementById('btn-search').addEventListener('click', () => {
     searchField.value = ''
 })
 
-// loader
+// loading spinner
 const toggleLoader = isLoading => {
     const loaderSection = document.getElementById('loader')
     if (isLoading) {
