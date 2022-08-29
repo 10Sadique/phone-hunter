@@ -1,18 +1,25 @@
 // load phones data
-const loadPhones = async (search) => {
+const loadPhones = async (search, dataLimit) => {
     const url = `https://openapi.programming-hero.com/api/phones?search=${search}`
     const res = await fetch(url)
     const data = await res.json()
 
-    displayPhones(data.data)
+    displayPhones(data.data, dataLimit)
 }
 
 // display phones
-const displayPhones = async phones => {
+const displayPhones = (phones, dataLimit) => {
     const phoneContainer = document.getElementById('phone-container')
     phoneContainer.textContent = ``
-    // showing first 21 phones
-    phones = phones.slice(0, 21)
+
+    // showing first 12 phones
+    const showAll = document.getElementById('load-more')
+    if (dataLimit && phones.length > 12) {
+        phones = phones.slice(0, 12)
+        showAll.classList.remove('hidden')
+    } else {
+        showAll.classList.add('hidden')
+    }
 
     // display no phone fount
     const noPhone = document.getElementById('no-phone-found')
@@ -51,17 +58,22 @@ const displayPhones = async phones => {
     toggleLoader(false)
 }
 
-// search button handler
-document.getElementById('btn-search').addEventListener('click', () => {
-    // start loader
+// process search
+const processSearch = (dataLimit) => {
     toggleLoader(true)
 
     const searchField = document.getElementById('search-field')
     const searchFieldData = searchField.value 
 
+    loadPhones(searchFieldData, dataLimit)
+}
 
-    loadPhones(searchFieldData)
-    searchField.value = ''
+
+// search button handler
+document.getElementById('btn-search').addEventListener('click', () => {
+    
+    // start loader
+    processSearch(12)
 })
 
 // loading spinner
@@ -73,3 +85,9 @@ const toggleLoader = isLoading => {
         loaderSection.classList.add('hidden')
     }
 }
+
+
+// show all
+document.getElementById('btn-show-all').addEventListener('click', () => {
+    processSearch()
+})
