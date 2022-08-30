@@ -29,7 +29,7 @@ const displayPhones = (phones, dataLimit) => {
         noPhone.classList.add('hidden')
     }
 
-    phones.forEach(phone => {
+    phones.forEach((phone) => {
         // console.log(phone)
 
         const phoneDiv = document.createElement('div')
@@ -46,7 +46,7 @@ const displayPhones = (phones, dataLimit) => {
                         By ${phone.brand}
                         </p>
                     </div>
-                    <button onclick="loadPhoneDetails('${phone.slug}')" class="self-end py-2 px-5 bg-indigo-600 text-white font-semibold rounded-lg shadow-md shadow-indigo-500/40 hover:bg-indigo-700 transition-all duration-300">Learn More &rarr;</button>
+                    <button onclick="loadPhoneDetails('${phone.slug}')" class="self-end py-2 px-5 bg-indigo-600 text-white font-semibold rounded-lg shadow-md shadow-indigo-500/40 hover:bg-indigo-700 transition-all duration-300 modal-button cursor-pointer" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Learn More &rarr;</button>
                 </div>
             </div>
         `
@@ -56,6 +56,7 @@ const displayPhones = (phones, dataLimit) => {
 
     // stop loader
     toggleLoader(false)
+
 }
 
 // process search
@@ -63,28 +64,26 @@ const processSearch = (dataLimit) => {
     toggleLoader(true)
 
     const searchField = document.getElementById('search-field')
-    const searchFieldData = searchField.value 
+    const searchFieldData = searchField.value
 
     loadPhones(searchFieldData, dataLimit)
 }
 
-
 // search button handler
 document.getElementById('btn-search').addEventListener('click', () => {
-    
     // start loader
     processSearch(12)
 })
 
 // search on enter key press
-document.getElementById('search-field').addEventListener('keypress', e => {
-    if (e.key === 'Enter') {   
+document.getElementById('search-field').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
         processSearch(12)
     }
 })
 
 // loading spinner
-const toggleLoader = isLoading => {
+const toggleLoader = (isLoading) => {
     const loaderSection = document.getElementById('loader')
     if (isLoading) {
         loaderSection.classList.remove('hidden')
@@ -93,15 +92,13 @@ const toggleLoader = isLoading => {
     }
 }
 
-
 // show all
 document.getElementById('btn-show-all').addEventListener('click', () => {
     processSearch()
 })
 
-
 // load phone details
-const loadPhoneDetails = async phoneId => {
+const loadPhoneDetails = async (phoneId) => {
     const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`
     const res = await fetch(url)
     const data = await res.json()
@@ -110,8 +107,30 @@ const loadPhoneDetails = async phoneId => {
 }
 
 // display phone details
-const displayPhoneDetails = phone => {
-    console.log(phone)
-}
+const displayPhoneDetails = (phone) => {
+    
+    // phone name
+    const phoneName = document.getElementById('phone-name')
+    phoneName.innerText = phone.name
 
-loadPhones('apple')
+    // showing image
+    const phoneImage = document.getElementById('phone-image')
+    phoneImage.innerHTML = `
+        <img class="rounded-lg w-96 " src="${phone.image}" alt="">
+    `
+
+    // phone details
+    const phoneDetails = document.getElementById('phone-specific-details')
+    phoneDetails.innerHTML = `
+    <p class="">Manufactured by <span class="text-indigo-700 font-bold">${phone.brand}</span></p>
+    <p class="font-semibold">${phone.releaseDate ? phone.releaseDate : 'No Release Date For Now'}</p>
+    <p class="pt-2">${phone.mainFeatures.chipSet} </p>
+    <p>${phone.mainFeatures.memory} </p>
+    <p>${phone.mainFeatures.storage} </p>
+    
+    <p class="pt-4"><span class="font-semibold">USB:</span> ${phone.others ? `${phone.others?.USB}` : 'No info available'}</p>
+    <p><span class="font-semibold">Bluetooth:</span> ${phone.others ? `${phone.others?.Bluetooth}` : 'No info available'}</p>
+    <p><span class="font-semibold">NFC:</span> ${phone.others ? `${phone.others?.NFC}` : 'No info available'}</p>
+    `
+
+}

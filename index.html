@@ -3,68 +3,152 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+
         <script src="https://cdn.tailwindcss.com"></script>
         <script>
             tailwind.config = {
                 theme: {
                     extend: {
                         fontFamily: {
-                            poppins: "'Poppins', sans-serif"
-                        }
-                    }
-                }
+                            poppins: "'Poppins', sans-serif",
+                        },
+                    },
+                },
             }
         </script>
         <title>Phone Hunter - API Practice</title>
     </head>
-    <body class="bg-gray-300 font-poppins">
+    <body class="bg-[#F0F1F3] font-poppins">
         <header>
-            <nav class="md:fixed top-0 w-full bg-gray-200 py-3 px-5 md:px-20 flex flex-col md:flex-row items-center justify-between gap-5 shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-70">
-                <div><a href="index.html" class="text-3xl font-black text-indigo-600">Phone Hunter</a></div>
+            <nav
+                class="md:fixed top-0 w-full bg-gray-200 py-3 px-5 md:px-20 flex flex-col md:flex-row items-center justify-between gap-5 shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-70"
+            >
                 <div>
-                    <div class="space-x-2 flex md:flex-row flex-col space-y-2 md:space-y-0 items-center">
-                        <input class="bg-gray-100 py-2 px-5 rounded-lg shadow-md shadbg-gray-100/40 md:text-left text-center" type="search" name="" id="search-field" placeholder="Search Phones">
-                        <button id="btn-search" class="text-white py-2 px-5 bg-indigo-600 rounded-lg shadow-md shadow-indigo-600/50 font-semibold hover:bg-indigo-700 transition-all duration-300">Search</button>
+                    <a
+                        href="index.html"
+                        class="text-3xl font-black text-indigo-600"
+                        >Phone Hunter</a
+                    >
+                </div>
+                <div>
+                    <div
+                        class="space-x-2 flex md:flex-row flex-col space-y-2 md:space-y-0 items-center"
+                    >
+                        <input
+                            class="bg-gray-100 py-2 px-5 rounded-lg shadow-md shadow-gray-400/40 md:text-left text-center border-0"
+                            type="search"
+                            name=""
+                            id="search-field"
+                            placeholder="Search Phones"
+                        />
+                        <button
+                            id="btn-search"
+                            class="text-white py-2 px-5 bg-indigo-600 rounded-lg shadow-md shadow-indigo-600/50 font-semibold hover:bg-indigo-700 transition-all duration-300"
+                        >
+                            Search
+                        </button>
                     </div>
                 </div>
             </nav>
         </header>
 
-        <main class="md:mt-24">
-            <section class="my-10 md:mx-16 mx-6">
-                <div id="phone-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-
-                </div>
+        <main class="md:pt-24">
+            <section class="mb-10 md:px-16 px-6">
+                <div
+                    id="phone-container"
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+                ></div>
                 <div id="no-phone-found" class="hidden">
                     <div class="grid place-items-center">
-                        <h3 class="text-center text-lg font-semibold text-gray-500">No phone found. Please try new search.</h3>
+                        <h3
+                            class="text-center text-lg font-semibold text-gray-500"
+                        >
+                            No phone found. Please try new search.
+                        </h3>
                     </div>
                 </div>
 
-                <div id="load-more" class="hidden mt-10">
+                <div id="load-more" class="hidden my-10">
                     <div class="grid place-items-center">
-                        <button id="btn-show-all" class="text-white py-2 px-5 bg-indigo-600 rounded-lg shadow-md shadow-indigo-600/50 font-semibold hover:bg-indigo-700 transition-all duration-300">Load more</button>
+                        <button
+                            id="btn-show-all"
+                            class="text-white py-2 px-5 bg-indigo-600 rounded-lg shadow-md shadow-indigo-600/50 font-semibold hover:bg-indigo-700 transition-all duration-300"
+                        >
+                            Load more
+                        </button>
                     </div>
                 </div>
             </section>
 
             <!-- loader -->
-            <section id="loader" class="hidden">
+            <section id="loader" class="hidden py-10">
                 <div class="grid place-items-center">
                     <div role="status">
-                        <svg aria-hidden="true" class="mr-2 w-10 h-10 text-gray-400 animate-spin fill-indigo-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"></path>
-                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"></path>
+                        <svg
+                            aria-hidden="true"
+                            class="mr-2 w-10 h-10 text-gray-400 animate-spin fill-indigo-600"
+                            viewBox="0 0 100 101"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                fill="currentColor"
+                            ></path>
+                            <path
+                                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                fill="currentFill"
+                            ></path>
                         </svg>
                         <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- modal -->
+            <section>
+                <div id="phone-details">
+                    <div class="modal fade fixed backdrop-filter backdrop-blur-xl top-0 left-0 hidden w-full h-full" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered modal-lg relative w-full">
+                            <div class="modal-content border-none shadow-lg relative flex flex-col md:flex-row items-center w-full bg-white rounded-lg">
+                
+                                <div class="rounded-lg p-4" id="phone-image">
+                                    
+                                </div>
+                
+                                <div class="self-start flex flex-col items-start justify-between w-full h-full">
+                                    <div class="modal-header flex flex-col items-start justify-between p-4 ">
+                                        <h5 class="text-2xl font-bold text-gray-800" id="phone-name">
+                                            
+                                        </h5>
+                                        <div id="phone-specific-details" class="pt-4 text-gray-500 space-y-1">
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer p-4 absolute right-0 bottom-0">
+                                        <button type="button" class="px-6 py-2.5 bg-rose-600 text-white font-medium text-xs rounded-lg shadow-md shadow-rose-600/40 hover:bg-rose-700 transition duration-300"
+                                        data-bs-dismiss="modal">
+                                            Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
         </main>
 
         <script src="js/script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
     </body>
 </html>
