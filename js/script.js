@@ -124,9 +124,12 @@ const displayPhoneDetails = (phone) => {
     phoneDetails.innerHTML = `
     <p class="">Manufactured by <span class="text-indigo-700 font-bold">${phone.brand}</span></p>
     <p class="font-semibold">${phone.releaseDate ? phone.releaseDate : 'No Release Date For Now'}</p>
-    <p class="pt-2">${phone.mainFeatures.chipSet} </p>
-    <p>${phone.mainFeatures.memory} </p>
-    <p>${phone.mainFeatures.storage} </p>
+
+    <p class="pt-2"><span class="font-semibold">Chipset:</span> ${phone.mainFeatures.chipSet ? phone.mainFeatures.chipSet : 'No info available'} </p>
+
+    <p><span class="font-semibold">Memory:</span> ${phone.mainFeatures.memory ? phone.mainFeatures.memory : 'No info available'} </p>
+
+    <p><span class="font-semibold">Storage:</span> ${phone.mainFeatures.storage ? phone.mainFeatures.storage : 'No info available'} </p>
     
     <p class="pt-4"><span class="font-semibold">USB:</span> ${phone.others ? `${phone.others?.USB}` : 'No info available'}</p>
     <p><span class="font-semibold">Bluetooth:</span> ${phone.others ? `${phone.others?.Bluetooth}` : 'No info available'}</p>
