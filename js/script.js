@@ -46,7 +46,7 @@ const displayPhones = (phones, dataLimit) => {
                         By ${phone.brand}
                         </p>
                     </div>
-                    <button class="self-end py-2 px-5 bg-indigo-600 text-white font-semibold rounded-lg shadow-md shadow-indigo-500/40 hover:bg-indigo-700 transition-all duration-300">Learn More &rarr;</button>
+                    <button onclick="loadPhoneDetails('${phone.slug}')" class="self-end py-2 px-5 bg-indigo-600 text-white font-semibold rounded-lg shadow-md shadow-indigo-500/40 hover:bg-indigo-700 transition-all duration-300">Learn More &rarr;</button>
                 </div>
             </div>
         `
@@ -76,6 +76,13 @@ document.getElementById('btn-search').addEventListener('click', () => {
     processSearch(12)
 })
 
+// search on enter key press
+document.getElementById('search-field').addEventListener('keypress', e => {
+    if (e.key === 'Enter') {   
+        processSearch(12)
+    }
+})
+
 // loading spinner
 const toggleLoader = isLoading => {
     const loaderSection = document.getElementById('loader')
@@ -91,3 +98,20 @@ const toggleLoader = isLoading => {
 document.getElementById('btn-show-all').addEventListener('click', () => {
     processSearch()
 })
+
+
+// load phone details
+const loadPhoneDetails = async phoneId => {
+    const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`
+    const res = await fetch(url)
+    const data = await res.json()
+
+    displayPhoneDetails(data.data)
+}
+
+// display phone details
+const displayPhoneDetails = phone => {
+    console.log(phone)
+}
+
+loadPhones('apple')
